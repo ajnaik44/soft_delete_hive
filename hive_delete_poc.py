@@ -3,6 +3,8 @@ from pyspark.sql.functions import col
 from pyspark.sql.functions import expr
 from pyspark.sql.functions import when
 
+# this will be change with actual hive loading tables ...To DO
+# configurable paramters will be done once all the code is done
 user_tracker = spark.read.option("header","true").csv(r"D:\clairvoyant\deletepoc\usecase_tracker.csv").select("property","usecase_name","table_name","identifier_key", "identifier_value")
 userDS = spark.read.option("header","true").csv(r"D:\clairvoyant\deletepoc\user.csv")
 
