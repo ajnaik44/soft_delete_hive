@@ -8,7 +8,12 @@ def rawSink(rowId):
 
 
 def getLatestRecord(rowId):
-    return  rowId
+    identifier_key = rowId['identifier_key']
+    identifier_value = rowId['identifier_value']
+    identifier_table = rowId['table_name']
+    print(identifier_key)
+    latestRecord = userDS.where(col(identifier_key)==rowId['identifier_value'])
+    return  latestRecord
 
 
 def raw(rowId):
@@ -16,10 +21,7 @@ def raw(rowId):
 
 
 def getMaskRecord(rowId):
-    latestRecord =getLatestRecord(row)
-    identifier_key = latestRecord['identifier_key']
-    print(identifier_key)
-    latestRecord = userDS.where(col(identifier_key)==row['identifier_value'])
+    latestRecord =getLatestRecord(rowId)
     metadata = user_metadata_ds.filter(user_metadata_ds.usecase_name==row['usecase_name']).filter(user_metadata_ds.table_name==row['table_name'])
     metadataItr =   metadata.collect()
     for metaDataRow in  metadataItr:
